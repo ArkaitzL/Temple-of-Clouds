@@ -13,7 +13,6 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject icono;
     [SerializeField] Image habilidadActual, habilidadActualTiempo;
 
-    [HideInInspector] public List<UIPowerUp> habilidades = new List<UIPowerUp>();
     [HideInInspector] public Action<int> cambiarHabilidad;
     [HideInInspector] public bool enMenu;
     int actual = -1;
@@ -23,14 +22,22 @@ public class UI : MonoBehaviour
     const float ESPERA_SALIR_MENU = 0.1f, VELOCIDAD_TIEMPO = 0.25f; // CAMARA LENTA
     const float MAX_CARGA = 1f, UPDATE_CARGA = 0.1f; // RECARGAR HABILIDADES
 
+    public List<UIPowerUp> Habilidades { get => Save.Data.habilidades; set => Save.Data.habilidades = value; }
+
     private void Awake()
-    {
+    {  
         inst = this;
     }
 
     private void Start()
     {
         RecargarPowerUp();
+
+        foreach (var h in Habilidades)
+        {
+            AñadirHabilidad(h, true);
+            h.carga = 1;
+        }
     }
 
     void Update()
@@ -56,7 +63,7 @@ public class UI : MonoBehaviour
             });
         }
 
-        if (habilidades == null || habilidades.Count == 0) return;
+        if (Habilidades == null || Habilidades.Count == 0) return;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
 
@@ -78,14 +85,14 @@ public class UI : MonoBehaviour
             actual--;
             if (actual < 0)
             {
-                actual = habilidades.Count - 1;
+                actual = Habilidades.Count - 1;
             }
         }
         else if (scroll < 0f)
         {
             // Desplazar hacia abajo
             actual++;
-            if (actual >= habilidades.Count)
+            if (actual >= Habilidades.Count)
             {
                 actual = 0;
             }
@@ -93,23 +100,23 @@ public class UI : MonoBehaviour
 
         menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(true);
         cambiarHabilidad?.Invoke(actual);
-        habilidadActual.sprite = habilidades[actual].imagen;
-        RecargarUI(habilidades[actual].carga);
+        habilidadActual.sprite = Habilidades[actual].imagen;
+        RecargarUI(Habilidades[actual].carga);
     }
 
-    public void AñadirHabilidad(UIPowerUp habilidad) 
+    public void AñadirHabilidad(UIPowerUp habilidad, bool existentes = false) 
     {
         GameObject elemento = Instantiate(icono, menu.transform);
         elemento.GetComponent<Image>().sprite = habilidad.imagen;
-        habilidades.Add(habilidad);
+        if(!existentes) Habilidades.Add(habilidad);
     }
 
     public void GastarPowerUp(int index) 
     {
-        if (habilidades[index].gasto <= habilidades[index].carga)
+        if (Habilidades[index].gasto <= Habilidades[index].carga)
         {
-            habilidades[index].carga -= habilidades[index].gasto;
-            RecargarUI(habilidades[index].carga);
+            Habilidades[index].carga -= Habilidades[index].gasto;
+            RecargarUI(Habilidades[index].carga);
         }
     }
 
@@ -117,7 +124,7 @@ public class UI : MonoBehaviour
     {
         ControladorBG.Rutina(UPDATE_CARGA, () => 
         {
-            foreach (var h in habilidades)
+            foreach (var h in Habilidades)
             {
                 if (h.carga >= MAX_CARGA) continue;
 
@@ -125,7 +132,7 @@ public class UI : MonoBehaviour
 
                 if (h.carga > MAX_CARGA) h.carga = MAX_CARGA;
 
-                if(actual != -1 && h.nombre.Equals(habilidades[actual].nombre)) RecargarUI(h.carga);
+                if(actual != -1 && h.nombre.Equals(Habilidades[actual].nombre)) RecargarUI(h.carga);
             }
         }, true);
     }

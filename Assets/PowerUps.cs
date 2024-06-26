@@ -42,7 +42,7 @@ public class PowerUps : MonoBehaviour
     {
         if (UI.inst.enMenu || actual == -1) return;
 
-        UIPowerUp powerActual = UI.inst.habilidades[actual];
+        UIPowerUp powerActual = UI.inst.Habilidades[actual];
         if (powerActual.gasto <= powerActual.carga)
         {
             powerups[powerActual.nombre]?.Invoke();
