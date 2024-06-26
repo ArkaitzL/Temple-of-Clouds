@@ -15,5 +15,5 @@ MonoBehaviour:
   nombre: Salto
   imagen: {fileID: 21300000, guid: 5bc3c5adcefd24544b7fbcfa249bf3f1, type: 3}
   gasto: 1
-  regargar: 0.34
+  regargar: 0.2
   carga: 1

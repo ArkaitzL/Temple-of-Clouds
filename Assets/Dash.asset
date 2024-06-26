@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Dash
   imagen: {fileID: 21300000, guid: 631b6728ad4f58942ac10456bb93c2c2, type: 3}
-  gasto: 0.5
-  regargar: 0.03
+  gasto: 1
+  regargar: 0.04
   carga: 1

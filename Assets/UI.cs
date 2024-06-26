@@ -16,7 +16,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public List<UIPowerUp> habilidades = new List<UIPowerUp>();
     [HideInInspector] public Action<int> cambiarHabilidad;
     [HideInInspector] public bool enMenu;
-    int actual;
+    int actual = -1;
 
     public static UI inst;
 
@@ -70,7 +70,7 @@ public class UI : MonoBehaviour
             enMenu = true;
         }
 
-        menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(false);
+        if (actual != -1) menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(false);
 
         if (scroll > 0f)
         {
@@ -94,6 +94,7 @@ public class UI : MonoBehaviour
         menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(true);
         cambiarHabilidad?.Invoke(actual);
         habilidadActual.sprite = habilidades[actual].imagen;
+        RecargarUI(habilidades[actual].carga);
     }
 
     public void AñadirHabilidad(UIPowerUp habilidad) 
@@ -124,7 +125,7 @@ public class UI : MonoBehaviour
 
                 if (h.carga > MAX_CARGA) h.carga = MAX_CARGA;
 
-                RecargarUI(h.carga);
+                if(actual != -1 && h.nombre.Equals(habilidades[actual].nombre)) RecargarUI(h.carga);
             }
         }, true);
     }
