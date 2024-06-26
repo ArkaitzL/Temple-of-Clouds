@@ -14,6 +14,7 @@ public class Movimiento : MonoBehaviour
     [SerializeField] LayerMask capaSuelo;
 
     [Header("Otros")]
+    [SerializeField] MiCursor cursor;
     [SerializeField] Transform motor;
     [SerializeField] [Range(-1, 1)] int direccion = -1;
 
@@ -45,6 +46,7 @@ public class Movimiento : MonoBehaviour
 
         float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
         angulo = Mathf.Repeat(angulo + 90f, 360f);
+        cursor.Rotar(angulo);
 
         motor.rotation = Quaternion.Euler(new Vector3(0, -angulo, 0));
         motor_rotacion = motor.rotation;
@@ -59,7 +61,12 @@ public class Movimiento : MonoBehaviour
     {
         if (!enSuelo()) return;
 
-        if (!Input.GetMouseButton(0) && !Input.GetKey(KeyCode.W)) return;
+        if (!Input.GetMouseButton(0) && !Input.GetKey(KeyCode.W)) {
+            cursor.Cambiar(false);
+            return;
+        }
+
+        cursor.Cambiar(true);
         rb.AddForce((motor.forward * direccion) * velocidad, ForceMode.Impulse);
 
         if (rb.velocity.magnitude > velocidadMax)

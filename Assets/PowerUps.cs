@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PowerUps : MonoBehaviour
 {
@@ -10,22 +11,28 @@ public class PowerUps : MonoBehaviour
     Rigidbody rb;
     Movimiento mv;
 
+    Dictionary<string, Action> powerups;
+    string actual;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         mv = GetComponent<Movimiento>();
+
+        powerups = new Dictionary<string, Action>{
+            { "Salto", Saltar}, 
+        };
     }
 
     private void Update()
     {
-        Saltar();
+        if (!Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.Space)) return;
+        powerups[actual]?.Invoke();
     }
 
     void Saltar()
     {
-        if (!Input.GetMouseButtonDown(1) && !Input.GetKeyDown(KeyCode.Space)) return;
         if (!mv.enSuelo()) return;
-
         rb.AddForce(Vector3.up * salto, ForceMode.Impulse);
     }
 
