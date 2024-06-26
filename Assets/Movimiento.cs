@@ -6,7 +6,7 @@ using UnityEngine;
 public class Movimiento : MonoBehaviour
 {
     [Header("Movimiento")]
-    [SerializeField] float velocidad = 15.0f;
+    [SerializeField] public float velocidad = 15.0f;
     [SerializeField] float velocidadMax = 25.0f;
 
     [Header("Cuerpo")]
@@ -61,13 +61,13 @@ public class Movimiento : MonoBehaviour
     {
         if (!enSuelo()) return;
 
-        if (!Input.GetMouseButton(0) && !Input.GetKey(KeyCode.W)) {
+        if (!Input.GetMouseButton(0)) {
             cursor.Cambiar(false);
             return;
         }
 
         cursor.Cambiar(true);
-        rb.AddForce((motor.forward * direccion) * velocidad, ForceMode.Impulse);
+        rb.AddForce(Direccion() * velocidad, ForceMode.Impulse);
 
         if (rb.velocity.magnitude > velocidadMax)
         {
@@ -76,6 +76,8 @@ public class Movimiento : MonoBehaviour
     }
 
     public bool enSuelo() => Physics.CheckSphere(transform.position, altura, capaSuelo);
+
+    public Vector3 Direccion() => motor.forward * direccion;
 
     void OnGUI()
     {

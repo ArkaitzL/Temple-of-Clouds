@@ -9,6 +9,6 @@ public class Templo : MonoBehaviour
     private void Start()
     {
         //** CAMBIAR PARA QUE LO HAGA AL INTERACTUAR CON EL TEMPLO ** //
-        UI.inst.habilidades.Add(habilidad);
+        UI.inst.AñadirHabilidad(habilidad);
     }
 }
