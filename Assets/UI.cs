@@ -34,10 +34,10 @@ public class UI : MonoBehaviour
         RecargarPowerUp();
 
         //Actualiza las habilidades guardadas anteriormente
-        foreach (var h in Habilidades)
+        for (int i = 0; i < Habilidades.Count; i++)
         {
-            AñadirHabilidad(h, true);
-            h.carga = 1;
+            AñadirHabilidad(Habilidades[i]);
+            Habilidades[i].carga = 1;
         }
     }
 
@@ -103,15 +103,27 @@ public class UI : MonoBehaviour
         menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(true);
         cambiarHabilidad?.Invoke(actual);
         habilidadActual.sprite = Habilidades[actual].imagen;
-        RecargarUI(Habilidades[actual].carga);
+        RecargarUI();
     }
 
-    public void AñadirHabilidad(UIPowerUp habilidad, bool existentes = false) 
+    public void AñadirHabilidad(UIPowerUp habilidad) 
     {
         //Añade una nueva habilidad a la lista
         GameObject elemento = Instantiate(icono, menu.transform);
         elemento.GetComponent<Image>().sprite = habilidad.imagen;
-        if(!existentes) Habilidades.Add(habilidad);
+        habilidad.imagenCarga = elemento.transform.GetChild(1).GetComponent<Image>();
+
+        //Reemplaza la habilidad existente
+        int index = Habilidades.FindIndex(h=> h.nombre == habilidad.nombre);
+        if (index != -1)
+        {
+            Habilidades[index] = habilidad;
+            return;
+        }
+
+        //Añade una nueva habilidad
+        Habilidades.Add(habilidad);
+
     }
 
     public void GastarPowerUp(int index) 
@@ -120,7 +132,7 @@ public class UI : MonoBehaviour
         if (Habilidades[index].gasto <= Habilidades[index].carga)
         {
             Habilidades[index].carga -= Habilidades[index].gasto;
-            RecargarUI(Habilidades[index].carga);
+            RecargarUI();
         }
     }
 
@@ -136,18 +148,27 @@ public class UI : MonoBehaviour
                 h.carga += h.regargar;
 
                 if (h.carga > MAX_CARGA) h.carga = MAX_CARGA;
-
-                if(actual != -1 && h.nombre.Equals(Habilidades[actual].nombre)) RecargarUI(h.carga);
             }
+
+            RecargarUI(false);
         }, true);
     }
 
-    void RecargarUI(float carga)
+    void RecargarUI(bool soloActual = true)
     {
         //Actualiza la UI de los PowerUps
-        if (habilidadActualTiempo == null) return;
+        if (habilidadActualTiempo == null || actual == -1) return;
 
-        habilidadActualTiempo.fillAmount = 1 - Mathf.Clamp01(carga / MAX_CARGA);
+        habilidadActualTiempo.fillAmount = 1 - Mathf.Clamp01(Habilidades[actual].carga / MAX_CARGA);
+
+        if (soloActual) return;
+
+        foreach (var h in Habilidades)
+        {
+            h.imagenCarga.fillAmount = 1 - Mathf.Clamp01(h.carga / MAX_CARGA);
+        }
+
+
     }
 }
 
