@@ -33,6 +33,7 @@ public class UI : MonoBehaviour
     {
         RecargarPowerUp();
 
+        //Actualiza las habilidades guardadas anteriormente
         foreach (var h in Habilidades)
         {
             AñadirHabilidad(h, true);
@@ -43,16 +44,14 @@ public class UI : MonoBehaviour
     void Update()
     {
         //Reiniciar
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         PowerUps();
     }
 
     void PowerUps() 
     {
+        //Sale del menu con Click Derecho
         if (enMenu && Input.GetMouseButtonDown(1)) {
 
             Time.timeScale = 1f;
@@ -66,9 +65,9 @@ public class UI : MonoBehaviour
         if (Habilidades == null || Habilidades.Count == 0) return;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-
         if (scroll == 0) return;
 
+        //Entra en el menu
         if (!menu.activeSelf)
         {
             menu.SetActive(true);
@@ -77,8 +76,10 @@ public class UI : MonoBehaviour
             enMenu = true;
         }
 
+        //Desactiva habilidad anterior
         if (actual != -1) menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(false);
 
+        //Comprueba hacia que direccion a girado la rueda del raton
         if (scroll > 0f)
         {
             // Desplazar hacia arriba
@@ -98,6 +99,7 @@ public class UI : MonoBehaviour
             }
         }
 
+        //Cambia habilidad actual
         menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(true);
         cambiarHabilidad?.Invoke(actual);
         habilidadActual.sprite = Habilidades[actual].imagen;
@@ -106,6 +108,7 @@ public class UI : MonoBehaviour
 
     public void AñadirHabilidad(UIPowerUp habilidad, bool existentes = false) 
     {
+        //Añade una nueva habilidad a la lista
         GameObject elemento = Instantiate(icono, menu.transform);
         elemento.GetComponent<Image>().sprite = habilidad.imagen;
         if(!existentes) Habilidades.Add(habilidad);
@@ -113,6 +116,7 @@ public class UI : MonoBehaviour
 
     public void GastarPowerUp(int index) 
     {
+        //Consume la carga
         if (Habilidades[index].gasto <= Habilidades[index].carga)
         {
             Habilidades[index].carga -= Habilidades[index].gasto;
@@ -122,6 +126,7 @@ public class UI : MonoBehaviour
 
     public void RecargarPowerUp() 
     {
+        //Recarga constantemente la carga
         ControladorBG.Rutina(UPDATE_CARGA, () => 
         {
             foreach (var h in Habilidades)
@@ -139,6 +144,7 @@ public class UI : MonoBehaviour
 
     void RecargarUI(float carga)
     {
+        //Actualiza la UI de los PowerUps
         if (habilidadActualTiempo == null) return;
 
         habilidadActualTiempo.fillAmount = 1 - Mathf.Clamp01(carga / MAX_CARGA);

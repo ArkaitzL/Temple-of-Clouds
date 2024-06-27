@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Velocidad
   imagen: {fileID: 21300000, guid: 9fa4e55d8d570f543abda27fd235209c, type: 3}
-  gasto: 0.005
-  regargar: 0.02
-  carga: 0.74999994
+  gasto: 0.01
+  regargar: 0.01
+  carga: 1

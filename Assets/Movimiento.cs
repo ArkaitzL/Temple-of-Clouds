@@ -24,8 +24,7 @@ public class Movimiento : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        motor_rotacion = motor.rotation;
+        motor_rotacion = motor.rotation; 
     }
 
     void Update()
@@ -36,11 +35,13 @@ public class Movimiento : MonoBehaviour
 
     void Unir() 
     {
+        //Se asegura de que la REF no se mueva
         motor.rotation = motor_rotacion;
     }
 
     void Rotar() 
     {
+        //Rota hacia donde apunta el raton
         Vector3 centro = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
         Vector3 direccion = Input.mousePosition - centro;
 
@@ -61,29 +62,36 @@ public class Movimiento : MonoBehaviour
     {
         if (!enSuelo()) return;
 
+        //No esta moviendose
         if (!Input.GetMouseButton(0)) {
             cursor.Cambiar(false);
             return;
         }
 
+        //Se mueve
         cursor.Cambiar(true);
         rb.AddForce(Direccion() * velocidad, ForceMode.Impulse);
 
+        //Limita la velocidad
         if (rb.velocity.magnitude > velocidadMax)
         {
             rb.velocity = rb.velocity.normalized * velocidadMax;
         }
     }
 
+    //Comprueba si esta tocando el suelo
     public bool enSuelo() => Physics.CheckSphere(transform.position, altura, capaSuelo);
 
+    //Comprueba la direccion en la que se tiene que mover
     public Vector3 Direccion() => motor.forward * direccion;
 
+    //Enseña la velocidad actual
     void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 200, 20), rb.velocity.magnitude.ToString());
     }
 
+    //Enseña el detector del suelo
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

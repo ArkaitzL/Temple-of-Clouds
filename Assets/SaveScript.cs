@@ -12,5 +12,5 @@ public partial class SaveScript
     public int lenguaje = 0;
 
     //-----------------------------------------------------------------
-    public List<UIPowerUp> habilidades = new List<UIPowerUp>();
+    public List<UIPowerUp> habilidades = new List<UIPowerUp>(); // Habilidades obtenidas
 }

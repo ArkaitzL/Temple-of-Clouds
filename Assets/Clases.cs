@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+//Clase para guardar los datos de los POWERUPS que se ven en el UI
 [CreateAssetMenu(fileName = "UIPowerUp", menuName = "SO/UIPowerUp")]
 public class UIPowerUp : ScriptableObject
 {

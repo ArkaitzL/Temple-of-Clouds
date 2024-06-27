@@ -18,6 +18,7 @@ public class PowerUps : MonoBehaviour
     Rigidbody rb;
     Movimiento mv;
 
+    //PowerUps
     Dictionary<string, Action> powerups;
     int actual = -1;
 
@@ -26,8 +27,9 @@ public class PowerUps : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         mv = GetComponent<Movimiento>();
 
-        UI.inst.cambiarHabilidad = CambiarHabilidad;
+        UI.inst.cambiarHabilidad = CambiarHabilidad; //Manda la funcion desde donde se cambia la habilidad actual
 
+        //Lista con todos los PowerUps *Tiene que tener los mismos que en los SO con el mismo nombre*
         powerups = new Dictionary<string, Action>{
             {"Salto", Saltar},
             {"Velocidad", Velocidad},
@@ -40,8 +42,9 @@ public class PowerUps : MonoBehaviour
 
     private void Update()
     {
-        if (UI.inst.enMenu || actual == -1) return;
+        if (UI.inst.enMenu || actual == -1) return; //Comprueba que no este en el menu y que tenga una habilidad en uso
 
+        //Llama a la habilidad actual
         UIPowerUp powerActual = UI.inst.Habilidades[actual];
         if (powerActual.gasto <= powerActual.carga)
         {
@@ -49,10 +52,13 @@ public class PowerUps : MonoBehaviour
         }
     }
 
+    //Cambia la habilidad actual
     void CambiarHabilidad(int index)
     {
         actual = index;
     }
+
+    //POWER UPS FUNCIONES
 
     void Saltar()
     {
@@ -60,7 +66,7 @@ public class PowerUps : MonoBehaviour
         if (!mv.enSuelo()) return;
 
         rb.AddForce(Vector3.up * salto, ForceMode.Impulse);
-        UI.inst.GastarPowerUp(actual);
+        UI.inst.GastarPowerUp(actual); //Consume el PowerUp
     }
 
     void Velocidad() 
@@ -68,7 +74,7 @@ public class PowerUps : MonoBehaviour
         if (Input.GetMouseButton(1) && mv.enSuelo())
         {
             mv.velocidad = velocidadDef * incremento;
-            UI.inst.GastarPowerUp(actual);
+            UI.inst.GastarPowerUp(actual); //Consume el PowerUp
         }
         else {
             mv.velocidad = velocidadDef;
@@ -79,6 +85,6 @@ public class PowerUps : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(1)) return;
         rb.AddForce(mv.Direccion() * impulso, ForceMode.Impulse);
-        UI.inst.GastarPowerUp(actual);
+        UI.inst.GastarPowerUp(actual); //Consume el PowerUp
     }
 }
