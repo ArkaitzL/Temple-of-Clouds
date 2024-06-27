@@ -8,6 +8,7 @@ public class UIPowerUp : ScriptableObject
 {
     public string nombre;
     public Sprite imagen;
+    public Color32 color;
     public float gasto; // Gasto por click
     public float regargar; // Recarga por 0.1 segundos
     [HideInInspector] public float carga = 1; // Carga de la habilidad

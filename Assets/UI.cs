@@ -110,8 +110,10 @@ public class UI : MonoBehaviour
     {
         //Añade una nueva habilidad a la lista
         GameObject elemento = Instantiate(icono, menu.transform);
-        elemento.GetComponent<Image>().sprite = habilidad.imagen;
         habilidad.imagenCarga = elemento.transform.GetChild(1).GetComponent<Image>();
+        Image imagen = elemento.GetComponent<Image>();
+        imagen.sprite = habilidad.imagen;
+        imagen.color = habilidad.color;
 
         //Reemplaza la habilidad existente
         int index = Habilidades.FindIndex(h=> h.nombre == habilidad.nombre);

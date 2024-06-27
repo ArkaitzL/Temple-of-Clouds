@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BaboOnLite;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movimiento : MonoBehaviour
@@ -21,6 +22,8 @@ public class Movimiento : MonoBehaviour
     Rigidbody rb;
     Quaternion motor_rotacion;
 
+    const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 100;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,6 +34,7 @@ public class Movimiento : MonoBehaviour
     {
         Unir();
         Rotar();
+        Morir();
     }
 
     void Unir() 
@@ -51,6 +55,21 @@ public class Movimiento : MonoBehaviour
 
         motor.rotation = Quaternion.Euler(new Vector3(0, -angulo, 0));
         motor_rotacion = motor.rotation;
+    }
+
+    void Morir() 
+    {
+        //Respawnea en el checkpoint al morir
+        if (transform.position.y <= DISTANCIA_MUERTE)
+        {
+            transform.position = Save.Data.ultimoCheckpoint.Y(DISTANCIA_RESPAWN);
+
+            Vector3 velocidad = rb.velocity;
+            velocidad.x = 0;
+            velocidad.z = 0;
+
+            rb.velocity = velocidad;
+        }
     }
 
     void FixedUpdate()

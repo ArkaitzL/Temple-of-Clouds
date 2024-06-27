@@ -13,4 +13,5 @@ public partial class SaveScript
 
     //-----------------------------------------------------------------
     public List<UIPowerUp> habilidades = new List<UIPowerUp>(); // Habilidades obtenidas
+    public Vector3 ultimoCheckpoint = Vector3.zero;
 }
