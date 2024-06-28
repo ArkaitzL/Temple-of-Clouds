@@ -27,7 +27,11 @@ public class Movimiento : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        motor_rotacion = motor.rotation; 
+        motor_rotacion = motor.rotation;
+
+        //Empezar en el ultimo checkpoint
+        transform.position = Save.Data.ultimoCheckpoint.Y(DISTANCIA_RESPAWN);
+
     }
 
     void Update()

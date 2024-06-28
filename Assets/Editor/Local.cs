@@ -5,8 +5,8 @@ using UnityEditor;
 public class MiScriptEditor : Editor
 {
 
-    string[] checkpointVars = { "marcador", "apagado", "encendido" };
-    string[] powerupsVars = { "habilidad", "informacion" };
+    string[] checkpointVars = { "id", "marcadorCheckpoint", "apagado", "encendido" };
+    string[] powerupsVars = { "habilidad", "marcadorPowerup" };
     string[] infoVars = { "informacion" };
 
     public override void OnInspectorGUI()
