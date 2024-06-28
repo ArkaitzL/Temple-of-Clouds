@@ -36,7 +36,7 @@ public class UI : MonoBehaviour
         //Actualiza las habilidades guardadas anteriormente
         for (int i = 0; i < Habilidades.Count; i++)
         {
-            AñadirHabilidad(Habilidades[i]);
+            AñadirHabilidad(Habilidades[i], true);
             Habilidades[i].carga = 1;
         }
     }
@@ -106,8 +106,12 @@ public class UI : MonoBehaviour
         RecargarUI();
     }
 
-    public void AñadirHabilidad(UIPowerUp habilidad) 
+    public void AñadirHabilidad(UIPowerUp habilidad, bool recargar = false) 
     {
+        //Si estas añadiendo una nueva
+        int index = Habilidades.FindIndex(h => h.nombre == habilidad.nombre);
+        if (index != -1 && !recargar) return;
+
         //Añade una nueva habilidad a la lista
         GameObject elemento = Instantiate(icono, menu.transform);
         habilidad.imagenCarga = elemento.transform.GetChild(1).GetComponent<Image>();
@@ -115,9 +119,8 @@ public class UI : MonoBehaviour
         imagen.sprite = habilidad.imagen;
         imagen.color = habilidad.color;
 
-        //Reemplaza la habilidad existente
-        int index = Habilidades.FindIndex(h=> h.nombre == habilidad.nombre);
-        if (index != -1)
+        //Actualiza la referencia
+        if (index != -1 && recargar)
         {
             Habilidades[index] = habilidad;
             return;
@@ -125,7 +128,6 @@ public class UI : MonoBehaviour
 
         //Añade una nueva habilidad
         Habilidades.Add(habilidad);
-
     }
 
     public void GastarPowerUp(int index) 
@@ -169,8 +171,6 @@ public class UI : MonoBehaviour
         {
             h.imagenCarga.fillAmount = 1 - Mathf.Clamp01(h.carga / MAX_CARGA);
         }
-
-
     }
 }
 
