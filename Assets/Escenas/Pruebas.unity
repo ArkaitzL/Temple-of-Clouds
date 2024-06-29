@@ -270,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100632968}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46181038, y: 0.00000001526169, z: -0.000000007946085, w: 0.8869787}
+  m_LocalRotation: {x: 0.46181035, y: -0.000000015261696, z: 0.0000000079460865, w: 0.88697875}
   m_LocalPosition: {x: 0, y: 16.25, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1156,7 +1156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 383383703}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.46181038, y: 0.00000001526169, z: -0.000000007946085, w: 0.8869787}
+  m_LocalRotation: {x: 0.46181035, y: -0.000000015261696, z: 0.0000000079460865, w: 0.88697875}
   m_LocalPosition: {x: 0, y: 16.25, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1524,12 +1524,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1419605398}
     m_Modifications:
-    - target: {fileID: 5725220956554223115, guid: b2d0ddcee4d3c4d46b0dfb951a38786a,
-        type: 3}
-      propertyPath: habilidad
-      value: 
-      objectReference: {fileID: 11400000, guid: cea7ea6b487ff5c4b8855625b068b375,
-        type: 2}
     - target: {fileID: 8159535100197871951, guid: b2d0ddcee4d3c4d46b0dfb951a38786a,
         type: 3}
       propertyPath: m_Name
