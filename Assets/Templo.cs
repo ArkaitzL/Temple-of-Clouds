@@ -40,8 +40,10 @@ public class Templo : MonoBehaviour
             info = false;
         }
 
-        //Forzar el refresco del inspector
+        #if UNITY_EDITOR
+        // Forzar el refresco del inspector
         UnityEditor.EditorUtility.SetDirty(this);
+        #endif
     }
 
     private void Start()
