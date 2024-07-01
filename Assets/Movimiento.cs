@@ -22,7 +22,7 @@ public class Movimiento : MonoBehaviour
     Rigidbody rb;
     Quaternion motor_rotacion;
 
-    const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 100;
+    const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 50;
 
     private void Start()
     {

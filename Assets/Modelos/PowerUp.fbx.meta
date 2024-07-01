@@ -3,7 +3,12 @@ guid: 19e0e18e5cd6b444c99ef14b5bc4b028
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: runas
+    second: {fileID: 2800000, guid: 7243efb60c07caf49b2f4d9a118ca82e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

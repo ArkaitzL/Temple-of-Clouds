@@ -19,7 +19,7 @@ public class Templo : MonoBehaviour
     [SerializeField] Renderer marcadorPowerup;
 
     //Info - PowerUp
-    [SerializeField] Transform informacion;
+    [SerializeField] GameObject informacion;
 
 
     public void OnValidate()
@@ -53,10 +53,17 @@ public class Templo : MonoBehaviour
             ultimoCheckpoint += ApagarCheckPoint;
             if (Save.Data.ultimoCheckpointID == id) marcadorCheckpoint.material = encendido;
         }
-
-        if (powerup)
+        else if (powerup)
         {
             marcadorPowerup.material.color = habilidad.color;
+        }
+    }
+
+    private void Update()
+    {
+        if (info || powerup)
+        {
+            CerrarInfo();
         }
     }
 
@@ -71,12 +78,28 @@ public class Templo : MonoBehaviour
         else if (powerup)
         {
             PowerUps();
+            AbrirInfo();
         }
         else if (info)
         {
-
+            AbrirInfo();
         }
 
+    }
+
+    void AbrirInfo() 
+    {
+        informacion.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    void CerrarInfo() 
+    {
+        if (Time.timeScale == 0 && Input.GetMouseButtonDown(1))
+        {
+            informacion.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 
     void PowerUps() 

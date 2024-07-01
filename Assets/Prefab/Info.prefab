@@ -179,7 +179,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 75.20778
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
@@ -189,12 +189,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.67
+      value: -22.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
@@ -204,7 +204,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
@@ -219,7 +219,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
@@ -326,12 +326,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 3, z: 12}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 12, y: 6.466647, z: 12}
+  m_Center: {x: 0, y: 3.7333236, z: -0}
 --- !u!114 &4164173888794420272
 MonoBehaviour:
   m_ObjectHideFlags: 0

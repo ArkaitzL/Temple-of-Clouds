@@ -31,7 +31,7 @@ public class MiScriptEditor : Editor
             }
         }
 
-        if (miScript.info)
+        if (miScript.info || miScript.powerup)
         {
             foreach (var var in infoVars)
             {

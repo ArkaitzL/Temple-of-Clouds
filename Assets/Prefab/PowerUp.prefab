@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 19e0e18e5cd6b444c99ef14b5bc4b028,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.7
+      value: 66.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e0e18e5cd6b444c99ef14b5bc4b028,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 9.58
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e0e18e5cd6b444c99ef14b5bc4b028,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 116.4
+      value: 152.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 19e0e18e5cd6b444c99ef14b5bc4b028,
         type: 3}
@@ -466,8 +466,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 3, z: 12}
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Size: {x: 12, y: 10.060469, z: 12}
+  m_Center: {x: 0, y: 5.5302343, z: 0}
 --- !u!114 &5725220956554223115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,6 +487,6 @@ MonoBehaviour:
   marcadorCheckpoint: {fileID: 0}
   apagado: {fileID: 0}
   encendido: {fileID: 0}
-  habilidad: {fileID: 11400000, guid: cea7ea6b487ff5c4b8855625b068b375, type: 2}
+  habilidad: {fileID: 11400000, guid: 98c9a0b8c4d58184db70f25c4b0b28a4, type: 2}
   marcadorPowerup: {fileID: 5612567796970683225}
   informacion: {fileID: 0}
