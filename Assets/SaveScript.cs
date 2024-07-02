@@ -15,4 +15,5 @@ public partial class SaveScript
     public List<UIPowerUp> habilidades = new List<UIPowerUp>(); // Habilidades obtenidas
     public Vector3 ultimoCheckpoint = Vector3.zero;
     public int ultimoCheckpointID = -1;
+    public int habilidadActual = -1;
 }

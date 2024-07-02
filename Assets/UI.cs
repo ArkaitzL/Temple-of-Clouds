@@ -39,6 +39,13 @@ public class UI : MonoBehaviour
             AñadirHabilidad(Habilidades[i], true);
             Habilidades[i].carga = 1;
         }
+
+        //Añade habilidad en uso
+        if (Save.Data.habilidadActual != -1)
+        {
+            actual = Save.Data.habilidadActual;
+            CambiarHabilidad();
+        }
     }
 
     void Update()
@@ -99,6 +106,12 @@ public class UI : MonoBehaviour
             }
         }
 
+        Save.Data.habilidadActual = actual;
+        CambiarHabilidad();
+    }
+
+    void CambiarHabilidad() 
+    {
         //Cambia habilidad actual
         menu.transform.GetChild(actual).GetChild(0).gameObject.SetActive(true);
         cambiarHabilidad?.Invoke(actual);
