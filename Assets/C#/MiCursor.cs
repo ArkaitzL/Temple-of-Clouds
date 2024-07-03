@@ -36,6 +36,6 @@ public class MiCursor : MonoBehaviour
     public void Rotar(float angulo) 
     {
         //Rota el cursor hacia donde se va a mover
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angulo - 180));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angulo));
     }
 }

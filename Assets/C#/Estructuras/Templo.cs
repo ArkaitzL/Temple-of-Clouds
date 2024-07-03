@@ -130,4 +130,19 @@ public class Templo : MonoBehaviour
         //Activar el checkpoint actual
         if (Save.Data.ultimoCheckpointID == id) marcadorCheckpoint.material = apagado;
     }
+
+    [ContextMenu("Usar")]
+    public void Usar() {
+
+        if (checkpoint)
+        {
+            Personaje.inst.transform.position = transform.position.Y(5);
+            CheckPoint();
+        }
+        else if (powerup) 
+        {
+            PowerUps();
+        }
+    
+    }
 }

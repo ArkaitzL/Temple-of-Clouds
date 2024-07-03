@@ -16,7 +16,7 @@ public class PowerUps : MonoBehaviour
     [SerializeField] float impulso = 3000.0f;
 
     Rigidbody rb;
-    Movimiento mv;
+    Personaje mv;
 
     //PowerUps
     Dictionary<string, Action> powerups;
@@ -25,7 +25,7 @@ public class PowerUps : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mv = GetComponent<Movimiento>();
+        mv = GetComponent<Personaje>();
 
         UI.inst.cambiarHabilidad = CambiarHabilidad; //Manda la funcion desde donde se cambia la habilidad actual
 

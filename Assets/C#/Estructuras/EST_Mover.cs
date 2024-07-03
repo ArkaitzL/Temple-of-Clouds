@@ -14,12 +14,12 @@ public class EST_Mover : MonoBehaviour
     bool iniciado, atras;
     int index = 0;
 
-    const float TAMAÑO_MARCADOR = 5f, DISTANCIA_LLEGADA = 0.5f;
+    const float TAMAÑO_MARCADOR = 2.5f, DISTANCIA_LLEGADA = 0.5f;
 
     private void Start()
     {
         //Suscribirse al reinicio
-        Movimiento.reiniciar += Reiniciar;
+        Personaje.reiniciar += Reiniciar;
 
         //Validar que tenga una ruta
         if (ruta == null || ruta.Length == 0)  return;

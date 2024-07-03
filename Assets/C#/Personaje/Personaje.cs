@@ -5,7 +5,7 @@ using BaboOnLite;
 using System;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Movimiento : MonoBehaviour
+public class Personaje : MonoBehaviour
 {
     [Header("Movimiento")]
     [SerializeField] public float velocidad = 15.0f;
@@ -17,20 +17,28 @@ public class Movimiento : MonoBehaviour
 
     [Header("Otros")]
     [SerializeField] MiCursor cursor;
-    [SerializeField] Transform motor;
+    [SerializeField] Transform motor, camara;
     [SerializeField] [Range(-1, 1)] int direccion = -1;
 
     Rigidbody rb;
-    Quaternion motor_rotacion;
+    Quaternion motor_rotacion, camara_rotacion;
+    float anguloCam = 0;
 
     public static event Action reiniciar;
+    public static Personaje inst;
 
-    const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 50;
+    const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 25, UMBRAL_CAM = 0.5f;
+
+    private void Awake()
+    {
+        inst = this;
+    }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         motor_rotacion = motor.rotation;
+        camara_rotacion = camara.rotation;
 
         //Empezar en el ultimo checkpoint
         transform.position = Save.Data.ultimoCheckpoint.Y(DISTANCIA_RESPAWN);
@@ -48,19 +56,28 @@ public class Movimiento : MonoBehaviour
     {
         //Se asegura de que la REF no se mueva
         motor.rotation = motor_rotacion;
+        camara.rotation = camara_rotacion;
     }
 
     void Rotar() 
     {
-        //Rota hacia donde apunta el raton
         Vector3 centro = new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
-        Vector3 direccion = Input.mousePosition - centro;
 
-        float angulo = Mathf.Atan2(direccion.y, direccion.x) * Mathf.Rad2Deg;
-        angulo = Mathf.Repeat(angulo + 90f, 360f);
-        cursor.Rotar(angulo);
+        // Convertir la dirección del mouse a coordenadas del mundo
+        Vector3 posicionRaton = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+        Vector3 posicionMotor = Camera.main.ScreenToWorldPoint(new Vector3(centro.x, centro.y, Camera.main.nearClipPlane));
 
-        motor.rotation = Quaternion.Euler(new Vector3(0, -angulo, 0));
+        // Calcular la dirección en el espacio del mundo
+        Vector3 direccion = posicionRaton - posicionMotor;
+        direccion.y = 0; // Asegúrate de que la dirección esté en el plano horizontal
+
+        // Calcular el ángulo en el espacio del mundo
+        float angulo = Mathf.Atan2(-direccion.z, direccion.x) * Mathf.Rad2Deg;
+        angulo = Mathf.Repeat(angulo - 90f, 360f); // Ajustar el ángulo para que sea relativo a la dirección hacia adelante del motor
+
+        cursor.Rotar(angulo + anguloCam + 180);
+
+        motor.rotation = Quaternion.Euler(new Vector3(0, angulo, 0));
         motor_rotacion = motor.rotation;
     }
 
@@ -104,6 +121,29 @@ public class Movimiento : MonoBehaviour
         {
             rb.velocity = rb.velocity.normalized * velocidadMax;
         }
+    }
+
+    public void RotarCam(Vector3 direccion) 
+    {
+        (Vector3, float)[] direcciones = {
+            (Vector3.forward, 180f),
+            (Vector3.back, 0f),
+            (Vector3.right, -90f),
+            (Vector3.left, 90f)
+        };
+
+        foreach (var (dir, angulo) in direcciones)
+        {
+            if (Vector3.Dot(direccion, dir) > UMBRAL_CAM)
+            {
+                camara.rotation = Quaternion.Euler(0, angulo, 0);
+                anguloCam = angulo;
+
+                break;
+            }
+        }
+
+        camara_rotacion = camara.rotation;
     }
 
     //Comprueba si esta tocando el suelo
