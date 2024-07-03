@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BaboOnLite;
+using System;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Movimiento : MonoBehaviour
@@ -21,6 +22,8 @@ public class Movimiento : MonoBehaviour
 
     Rigidbody rb;
     Quaternion motor_rotacion;
+
+    public static event Action reiniciar;
 
     const float DISTANCIA_MUERTE = -25, DISTANCIA_RESPAWN = 50;
 
@@ -73,6 +76,7 @@ public class Movimiento : MonoBehaviour
             velocidad.z = 0;
 
             rb.velocity = velocidad;
+            reiniciar?.Invoke();
         }
     }
 

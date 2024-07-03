@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Caida : MonoBehaviour
+public class EST_Caida : MonoBehaviour
 {
     [SerializeField] GameObject entero, roto;
 
