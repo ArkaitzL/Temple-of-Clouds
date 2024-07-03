@@ -81,6 +81,8 @@ public class EST_Mover : MonoBehaviour
     public void Reiniciar()
     {
         iniciado = false;
+        atras = false;
+        StopAllCoroutines();
         index = 0;
         transform.position = padre.position + ruta[index];
     }
