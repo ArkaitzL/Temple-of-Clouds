@@ -20,9 +20,9 @@ public class Personaje : MonoBehaviour
     [SerializeField] Transform motor, camara;
     [SerializeField] [Range(-1, 1)] int direccion = -1;
 
-    Rigidbody rb;
     Quaternion motor_rotacion, camara_rotacion;
-    float anguloCam = 0;
+    Rigidbody rb;
+    [HideInInspector] public float anguloCam = 180;
 
     public static event Action reiniciar;
     public static Personaje inst;
@@ -43,6 +43,8 @@ public class Personaje : MonoBehaviour
         //Empezar en el ultimo checkpoint
         transform.position = Save.Data.ultimoCheckpoint.Y(DISTANCIA_RESPAWN);
 
+        //Empieza con el angolo correcto
+        RotarCam();
     }
 
     void Update()
@@ -50,6 +52,9 @@ public class Personaje : MonoBehaviour
         Unir();
         Rotar();
         Morir();
+
+        //Desactiva el curso cuando no este en el suelo
+        if (!enSuelo()) cursor.Cambiar(false);
     }
 
     void Unir() 
@@ -75,7 +80,7 @@ public class Personaje : MonoBehaviour
         float angulo = Mathf.Atan2(-direccion.z, direccion.x) * Mathf.Rad2Deg;
         angulo = Mathf.Repeat(angulo - 90f, 360f); // Ajustar el ángulo para que sea relativo a la dirección hacia adelante del motor
 
-        cursor.Rotar(angulo + anguloCam + 180);
+        cursor.Rotar(angulo + anguloCam);
 
         motor.rotation = Quaternion.Euler(new Vector3(0, angulo, 0));
         motor_rotacion = motor.rotation;
@@ -94,6 +99,9 @@ public class Personaje : MonoBehaviour
 
             rb.velocity = velocidad;
             reiniciar?.Invoke();
+
+            //Cambia el angulo de la camara
+            RotarCam();
         }
     }
 
@@ -139,10 +147,25 @@ public class Personaje : MonoBehaviour
                 camara.rotation = Quaternion.Euler(0, angulo, 0);
                 anguloCam = angulo;
 
+                if (anguloCam == 0 || anguloCam == 180) anguloCam += 180;
+                if (anguloCam == 360) anguloCam = 0;
+
                 break;
             }
         }
 
+        camara_rotacion = camara.rotation;
+    }
+
+    public void RotarCam() 
+    {
+        anguloCam = Save.Data.ultimoAngulo;
+        float cambio = 0;
+
+        if (anguloCam == 0 || anguloCam == 180) cambio = 180;
+        //if (cambio == 360) cambio = 0;
+
+        camara.rotation = Quaternion.Euler(0, anguloCam + cambio, 0);
         camara_rotacion = camara.rotation;
     }
 

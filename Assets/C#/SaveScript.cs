@@ -13,7 +13,8 @@ public partial class SaveScript
 
     //-----------------------------------------------------------------
     public List<UIPowerUp> habilidades = new List<UIPowerUp>(); // Habilidades obtenidas
-    public Vector3 ultimoCheckpoint = Vector3.zero;
-    public int ultimoCheckpointID = -1;
-    public int habilidadActual = -1;
+    public Vector3 ultimoCheckpoint = Vector3.zero; //Posicion de spawn
+    public int ultimoCheckpointID = -1; //Referencia al ultimo checkpoint
+    public int habilidadActual = -1; // Habilidad en uso
+    public float ultimoAngulo = 180; //Rotacion de la camara en el checkpoint
 }
