@@ -85,6 +85,8 @@ public class EST_Mover : MonoBehaviour
         StopAllCoroutines();
         index = 0;
         transform.position = padre.position + ruta[index];
+
+        if (inicioAuto) StartCoroutine(Mover());
     }
 
     // Dibuja un círculo en cada punto de la ruta en el modo de edición cuando el objeto está seleccionado
