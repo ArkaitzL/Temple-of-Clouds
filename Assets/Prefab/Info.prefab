@@ -1,5 +1,72 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3599306509385458143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698424996155875104}
+  - component: {fileID: 2786191557552317030}
+  - component: {fileID: 3974653858352819642}
+  m_Layer: 0
+  m_Name: Cambiocamara (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1698424996155875104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599306509385458143}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0.06, y: 5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1682414608754724992}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2786191557552317030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599306509385458143}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 17, y: 15, z: 17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3974653858352819642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599306509385458143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036d6e0b8ed0df240ab06cbfbf730a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoint: 0
 --- !u!1 &7737026333106700566
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,10 +339,14 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       insertIndex: 0
-      addedObject: {fileID: 5204750303119438321}
+      addedObject: {fileID: 1698424996155875104}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
         type: 3}
       insertIndex: 1
+      addedObject: {fileID: 5204750303119438321}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3a74bc70093f0b9479ce93baeb9733d7,
+        type: 3}
+      insertIndex: 2
       addedObject: {fileID: 2697947672866553132}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3a74bc70093f0b9479ce93baeb9733d7,

@@ -12,7 +12,7 @@ public class Personaje : MonoBehaviour
     [SerializeField] float velocidadMax = 25.0f;
 
     [Header("Cuerpo")]
-    [SerializeField] float altura = 1.0f;
+    [SerializeField] float altura = 1.0f, anchura;
     [SerializeField] LayerMask capaSuelo;
 
     [Header("Otros")]
@@ -170,7 +170,11 @@ public class Personaje : MonoBehaviour
     }
 
     //Comprueba si esta tocando el suelo
-    public bool enSuelo() => Physics.CheckSphere(transform.position, altura, capaSuelo);
+    public bool enSuelo()
+    {
+        Vector3 centroCaja = transform.position + Vector3.down * (altura / 2);
+        return Physics.CheckBox(centroCaja, new Vector3(anchura, altura, anchura) / 2, Quaternion.identity, capaSuelo);
+    }
 
     //Comprueba la direccion en la que se tiene que mover
     public Vector3 Direccion() => motor.forward * direccion;
@@ -185,6 +189,7 @@ public class Personaje : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, altura);
+        Vector3 centroCaja = transform.position + Vector3.down * (altura / 2);
+        Gizmos.DrawWireCube(centroCaja, new Vector3(anchura, altura, anchura));
     }
 }
