@@ -97,6 +97,8 @@ public class Personaje : MonoBehaviour
             velocidad.x = 0;
             velocidad.z = 0;
 
+            rb.angularVelocity = Vector3.zero;
+
             rb.velocity = velocidad;
             reiniciar?.Invoke();
 
