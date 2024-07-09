@@ -17,4 +17,5 @@ public partial class SaveScript
     public int ultimoCheckpointID = -1; //Referencia al ultimo checkpoint
     public int habilidadActual = -1; // Habilidad en uso
     public float ultimoAngulo = 180; //Rotacion de la camara en el checkpoint
+    public float muertes = 0, tiempo = 0;
 }

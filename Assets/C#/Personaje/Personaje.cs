@@ -180,10 +180,10 @@ public class Personaje : MonoBehaviour
     public Vector3 Direccion() => motor.forward * direccion;
 
     //Enseña la velocidad actual
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 200, 20), rb.velocity.magnitude.ToString());
-    }
+    //void OnGUI()
+    //{
+    //    GUI.Label(new Rect(10, 10, 200, 20), rb.velocity.magnitude.ToString());
+    //}
 
     //Enseña el detector del suelo
     void OnDrawGizmosSelected()
