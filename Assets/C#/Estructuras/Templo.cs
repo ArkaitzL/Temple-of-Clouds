@@ -65,7 +65,7 @@ public class Templo : MonoBehaviour
     {
         if (info || powerup)
         {
-            CerrarInfo();
+            if(informacion.activeSelf) CerrarInfo();
         }
     }
 
@@ -79,7 +79,7 @@ public class Templo : MonoBehaviour
         }
         else if (powerup)
         {
-            PowerUps();
+            AñadirPowerUps();
             AbrirInfo();
         }
         else if (info)
@@ -93,6 +93,8 @@ public class Templo : MonoBehaviour
     {
         informacion.SetActive(true);
         Time.timeScale = 0;
+
+        PowerUps.disponible = false;
     }
 
     void CerrarInfo() 
@@ -101,10 +103,12 @@ public class Templo : MonoBehaviour
         {
             informacion.SetActive(false);
             Time.timeScale = 1;
+            ControladorBG.Rutina(0.1f, () => { PowerUps.disponible = true; });
+            
         }
     }
 
-    void PowerUps() 
+    void AñadirPowerUps() 
     {
         UI.inst.AñadirHabilidad(habilidad);
     }
@@ -141,7 +145,7 @@ public class Templo : MonoBehaviour
         }
         else if (powerup) 
         {
-            PowerUps();
+            AñadirPowerUps();
         }
     
     }

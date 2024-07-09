@@ -22,6 +22,8 @@ public class PowerUps : MonoBehaviour
     Dictionary<string, Action> powerups;
     int actual = -1;
 
+    public static bool disponible = true;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -62,7 +64,7 @@ public class PowerUps : MonoBehaviour
 
     void Saltar()
     {
-        if (!Input.GetMouseButtonDown(1)) return;
+        if (!disponible || !Input.GetMouseButtonDown(1)) return;
         if (!mv.enSuelo()) return;
 
         rb.AddForce(Vector3.up * salto, ForceMode.Impulse);
@@ -71,7 +73,7 @@ public class PowerUps : MonoBehaviour
 
     void Velocidad() 
     {
-        if (Input.GetMouseButton(1) && mv.enSuelo())
+        if (disponible && Input.GetMouseButton(1) && mv.enSuelo())
         {
             mv.velocidad = velocidadDef * incremento;
             UI.inst.GastarPowerUp(actual); //Consume el PowerUp
@@ -83,7 +85,8 @@ public class PowerUps : MonoBehaviour
 
     void Dash()
     {
-        if (!Input.GetMouseButtonDown(1)) return;
+        if (!disponible || !Input.GetMouseButtonDown(1)) return;
+
         rb.AddForce(mv.Direccion() * impulso, ForceMode.Impulse);
         UI.inst.GastarPowerUp(actual); //Consume el PowerUp
     }
