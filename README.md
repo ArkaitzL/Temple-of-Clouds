@@ -5,7 +5,7 @@
 ### Jugabilidad
 - **Exploración**: Recorre un templo flotante lleno de secretos y obstáculos por descubrir.
 - **Habilidades desbloqueables**: Obtén y usa habilidades especiales que te ayudarán a avanzar y superar nuevos retos.
-- 
+  
 ### Controles
 Los controles están diseñados para ofrecer un manejo intuitivo y una experiencia fluida:  
   - **Clic izquierdo**: Mueve al personaje hacia donde quieras.
